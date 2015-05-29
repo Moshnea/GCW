@@ -61,8 +61,8 @@ header {
 
 #juicy{
 	margin:0 auto;
-	left: 40%;
-	top:30%;
+	left: 30%;
+	top:120px;
 	font-size:30px;
 	color:white;
 	font-family:Lucida Handwriting;
@@ -72,9 +72,11 @@ header {
 
 #best{
 	margin:0 auto;
-	left:30%;
-	top:65%;
+	left:-10%;
+	top:85%;
+	float:left;
 	font-size:15px;
+	width:450px;
 	color:white;
 	font-family:Lucida Handwriting;
 	position:absolute; z-index:4;
@@ -175,9 +177,7 @@ font-size:25px;
 #arrayBar{
 	margin:0 auto;
 	position:absolute;
-	left:43%;
-    
-	
+	left:43%;	
 }
 
 
@@ -206,7 +206,7 @@ margin-top:0px;
 
 
 #arrayBar{
-min-width:1280px;
+min-width:200px;
 height:20px;
 float:left;
 margin-bottom:220px;

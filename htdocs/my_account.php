@@ -160,6 +160,10 @@
 	}
 ?>
 
+<section id="section3">
+	<?php require("paginare.php"); ?>
+</section>
+
 <?php require("the_footer.php"); ?>
 
 </body>

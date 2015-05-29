@@ -1,9 +1,11 @@
 <header>
 	<!-- Imagini/ overlay !-->
 	<div id="overlay"></div>
-	<div id="logo"></div>
-	<div id="juicy"> <strong><h1>Juicy</h1></strong> </div>
-	<div id ="best"> <h2>- Cel mai mișto site de profil din Romania -</h2> </div>
+	<div id="logo">
+		<div id="juicy"> <strong><h1>Juicy</h1></strong> </div>
+	
+		<div id ="best"> <h2>- Cel mai mișto site de profil din Romania -</h2> </div>
+	</div>
 
 	<!-- Meniu !-->
 	<div id = "menu">
