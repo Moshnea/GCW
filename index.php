@@ -23,6 +23,7 @@
 <section id="section1">
 
 	<?php 
+	//
 		if(isset($_SESSION['username']))
 		{
 			$n = $_SESSION['nume'] . " " . $_SESSION['prenume'];
