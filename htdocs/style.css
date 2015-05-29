@@ -87,7 +87,8 @@ header {
 	color:white;
 	font-family:Verdana;
 	font-size:15px;
-	left:43%;
+	right:0%;
+	float:left;
 	top:90%;
 }
 
