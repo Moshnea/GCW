@@ -517,7 +517,8 @@ create or replace package body user_pkg is
       v_wallet := dbms_random.value(1,1000);
       new_profile := new Profil;
       dbms_output.put_line(new_profile.gender);
-      insert into users (username, password, nume, prenume, wallet, arome, profile) values (new_user, new_pass, new_nume, new_prenume, v_wallet, new_arome, new_profile);    
+      insert into users (username, password, nume, prenume, wallet, arome, profile) 
+        values (new_user, new_pass, new_nume, new_prenume, v_wallet, new_arome, new_profile);    
     end loop;
   exception
     when dup_val_on_index then
@@ -672,10 +673,78 @@ end user_pkg;
 -- Anonymous block
 
 
+create or replace procedure gen_produse (nr_produs in number) is
+  nr number(5) := 1;
+  new_denumire produse.denumire%type;
+  new_stoc produse.stoc%type;
+  new_regiune produse.regiune%type;
+  new_pret produse.pret%type;
+  new_tip proprietati.tip%type;
+  new_url_descriere proprietati.url_descriere%type;
+  new_arome proprietati.arome%type;
+  v_aroma varchar2(50);
+  e_dup_val exception;
+begin
+  
+  for i in 1..nr_produs
+  loop
+    v_aroma := '';
+    if i mod 2 = 0 then
+      v_aroma := v_aroma || 'mere,';
+    else
+      v_aroma := v_aroma ||'pere,';
+    end if;
+    if i mod 3 = 0 then
+      v_aroma := v_aroma ||'portocale,';
+    end if;
+    if i mod 5 = 0 then
+      v_aroma := v_aroma ||'fructe_de_padure,';
+    end if;
+    new_arome := produse_pkg.new_aroma(v_aroma);
+    new_denumire := 'produs' || nr;
+    new_stoc := dbms_random.value(1,1000);
+    new_regiune := 'Moldova';
+    new_pret := dbms_random.value(4,20);
+    new_tip := dbms_random.value(0,1);
+    new_url_descriere := '/desc_prod'||'/'||new_denumire||'.txt';
+    
+    nr := nr + 1;
+    produse_pkg.add_produs(new_denumire, new_stoc, new_regiune, new_pret, new_tip, new_url_descriere, new_arome);
+  end loop;
+exception
+  when dup_val_on_index then
+    raise e_dup_val;
+end;
+/
+
+
+create or replace procedure gen_vanzari(p_user varchar2, p_max number) is
+  nr_gen number(5);
+  v_id number(5);
+begin
+  nr_gen := dbms_random.value(1,p_max/2);
+  for i in 1..nr_gen
+  loop
+    v_id := dbms_random.value(1,p_max);
+    insert into vanzari
+    values(p_user, v_id, sysdate);
+  end loop;
+end;
+/
+
 set serveroutput on;
 
 begin
   user_pkg.gen_users(3);
+end;
+/
+
+begin
+  gen_produse(17);
+--  for i in 1..17
+--  loop
+--    dbms_output.put_line(produse_pkg.get_aroma_string(produse_pkg.get_aroma(i)));
+--  end loop;
 end;
 /
 
