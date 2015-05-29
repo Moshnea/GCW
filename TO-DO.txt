@@ -1,0 +1,66 @@
+*****************************************************************
+* (daca ceva lipseste puneti si voi)							*
+* Cand terminati ceva puneti la rubrica corespunzatoare "done"	*
+* precizand si ce s-a facut/schimbat							*
+*****************************************************************
+
+
+Adaugat o noua pagina pt ce-i logati in care sa arate ce are in cosul de cumparaturi.
+
+
+Contul meu:
+-De afisat profilul utilizatorului
+	+ buton (alta pagina/pop-up) de schimbat parola (de username zic eu ca nu ar fi nevoie)
+	+ buton de editat profilul (alta pagina/pop-up)
+	+ buton de adaugat credit in portofel
+	+ buton de afisare istoricul cumparaturilor (de preferat in josul paginii)
+
+
+Meniu:
+- Adaugari de produse (paginare cu N produse, de preferant N sa fie 10)
+	*Pt cei logati posibilitatea de a baga produsul in cosul de cumparaturi
+- Pt cei logati sa apara (pe undeva in aceasi pagina) cele 3 produse recomandate
+
+
+Pop-up (Login/Register/etc.) :
+- La inregistrare sa arate restrictiile (doar textul, implementarea exista)
+	* username si parola intre 3 si 20 caractere
+	* confirmarea parolei sa fie la fel ca parola
+	* numele si prenumele sa fie diferite
+
+
+Contact:
+-?????????
+
+
+CSS & HTML
+- anumite probleme de asezare in pagina
+
+
+
+********
+* DONE *
+********
+
+
+Cos de cumparaturi:
+
+
+
+Contul meu:
+
+
+
+Meniu:
+
+
+
+Pop-up:
+
+
+
+Contact:
+
+
+
+CSS & HTML:
