@@ -30,6 +30,18 @@ header {
 	position:relative; 
 }
 
+#imens{
+	margin-top: 0px;
+	background-image: url(img/background.jpg);
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+
+#footer2{
+	float:left;
+}
+
 #overlay{
 	background-color:rgba(63,63,63, 0.59);
 	min-width:100%;
@@ -123,7 +135,7 @@ header {
 	background-color:rgb(235, 235, 235);
 	margin:0 auto;
 	margin-bottom:5px;
-	
+	position: relative;
 }
 
 #playbtn{
@@ -131,9 +143,11 @@ header {
 	height:100px;
 	background:url(img/play.png);
 	background-size:100% 100%;
+
 	position:absolute;
-	margin-top:9%;
-	margin-left:23%;
+	margin-top:20%;
+	margin-left: 42%;
+	/*margin-left:23%;*/
 }
 
 #playbtn:hover{
@@ -141,18 +155,30 @@ header {
 	background-size:100% 100%;
 }
 
-#section1{
-	margin-bottom:220px;
-}
-
-#section1 h2{
+#text-intro{
 	font-family:Calibri;
 	color:rgb(85,85,85);
 	text-align:center;
 	font-size:25px;
 	font-weight:300;
 	padding-left:30px;
+	/*margin-top: -200px;*/
+	width: 85%;
+	margin: -200px auto 150px auto;
 }
+
+#section1{
+	margin-bottom:220px;
+}
+
+/*#section1 h2{
+	font-family:Calibri;
+	color:rgb(85,85,85);
+	text-align:center;
+	font-size:25px;
+	font-weight:300;
+	padding-left:30px;
+}*/
 
 #section2{
 	margin-left:8%;
@@ -254,8 +280,9 @@ header {
 
 
 #section3{
-	margin-left:8%;
-	margin-bottom:220px;
+	margin-left:0%;
+	margin-bottom:150px;
+	width: 700px;
 }
 
 #section3 h2{
@@ -269,22 +296,25 @@ header {
 #bgGal{
 	width:1280px;
 	max-height:720px;
+	margin: 3%;
 }
 
 
 .continut_bg {
-	width : 970px;
+	/*width : 23.7%;*/
+	width:970px;
 	margin : 0 auto;
 }	
 
-	
+
 #footer-bg{
 	overflow : hidden;
 	padding : 50px 0;
 	background : #3b3b3b;
 	color:white;
 	font-family:Calibri;
-	
+	margin-bottom: 0%;
+	/*float:left;*/
 }
 
 

@@ -20,6 +20,8 @@
 
 <?php require("pop-up.php"); ?>
 
+
+
 <section id="section1">
 
 	<?php 
@@ -36,12 +38,22 @@
 	?>
 
 	<div id="bgVid">
-		<div id="playbtn"></div>
-	</div>
-	<h2>OUR FRESHLY SQUEEZED JUICES ARE DELICIOUS AND NUTRITIOUS, PACKED
+		<object width="720" height="360"
+	data="http://www.youtube.com/v/HN0khh9Q_fc">
+	</object>
+		<!-- <div id="playbtn"></div>
+	</div> -->
+	
+
+</section>
+<div id="text-intro"
+<h2>OUR FRESHLY SQUEEZED JUICES ARE DELICIOUS AND NUTRITIOUS, PACKED
  WITH WHOLESOME INGREDIENTS. JUICING MADE SIMPLE FRESH ON-THE-SPOT, AND
  NOW AVAILABLE IN COLD PRESSED ON-THE-GO.</h2>
-</section>
+</div>
+		<!--
+			begin-slider-imagini
+		-->
 
 <section id="section2">
 	<h2><b>New Types of juices</b></h2>
@@ -67,8 +79,8 @@
 			</div>
 		
 		</section>
-		
-		
+
+	
 		
 		<section id="s2" class="sliderHiddenSection" class="sections" >
 			<div id = "sImg1" class="slSection">
@@ -114,7 +126,7 @@
 			</div>
 		
 		</section>
-		
+	
 		<section id="s4" class="sliderHiddenSection" class="sections" >
 			<div id = "sImg1" class="slSection">
 				<img src="img/slider/img1.png" class = "imajine" />
@@ -136,6 +148,8 @@
 			</div>
 		
 		</section>
+
+
 		
 	</div>
 	<div id = "arrayBar">
@@ -153,25 +167,28 @@
 
 <script src = "script/slider.js" type="text/javascript"></script>
 
+		<!--
+			end-slider-imagini
+		-->
+
 
 
 <section id="section3">
 
-
-	<h2>Image Gallery</h2>
 	<div id = "bgGal">
-		<img id = "cimg1" src = "img/6.jpg" height = "300px"/>
-		<img id = "cimg2" src = "img/1.jpg" height = "300px"/>
-		<img id = "cimg3" src = "img/2.jpg" height = "300px"/>
-		<img id = "cimg4" src = "img/3.jpg" height = "300px"/>
-		<img id = "cimg5" src = "img/4.jpg" height = "300px"/>
-		<img id = "cimg6" src = "img/5.jpg" height = "300px"/>
-		
+	<h2>Image Gallery</h2>
+	
+		<img id = "cimg1" src = "img/6.jpg" height = "320px"/>
+		<img id = "cimg2" src = "img/1.jpg" height = "320px"/>
+		<img id = "cimg3" src = "img/2.jpg" height = "320px"/>
+		<img id = "cimg4" src = "img/3.jpg" height = "320px"/>
+		<img id = "cimg5" src = "img/4.jpg" height = "320px"/>
+		<img id = "cimg6" src = "img/5.jpg" height = "320px"/>
 	</div>
 
 </section>
 
-
+	
 
 
 <section id="imageDialog">
@@ -181,9 +198,11 @@
 	
 	
 </section>
-
+ 
+ <section></section>
 
 <script src = "script/popups.js" type = "text/javascript" ></script>
+
 
 <?php require("the_footer.php"); ?>
 

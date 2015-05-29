@@ -109,7 +109,15 @@
 <?php
 	if(!isset($_SESSION['username']))
 		die("Mai intai trebuie sa va logati!");
+	echo "Contul dumneavoastra [" . $_SESSION['username'] . "]";
 ?>
+
+<div id="meniu_contul_meu">
+	<ul>
+		<strong><li><a id = "yo" href="#openUsername" target="_self">Schimba Username</a></li></strong><br/>
+		<strong><li><a id = "yo" href="#openPass" target="_self">Schimba Parola</a></li></strong><br/>
+	</ul>
+</div>
 
 <?php
 	if($_GET['actiune'] == "schimbaparola")
@@ -151,15 +159,6 @@
 		}
 	}
 ?>
-
-<div id = "avatar"></div>
-
-<div id="meniu_contul_meu">
-	<ul>
-		<strong><li><a id = "yo" href="#openUsername" target="_self">Schimba Username</a></li></strong><br/>
-		<strong><li><a id = "yo" href="#openPass" target="_self">Schimba Parola</a></li></strong><br/>
-	</ul>
-</div>
 
 <section id="section3">
 	<?php require("paginare.php"); ?>

@@ -34,7 +34,11 @@ Contact:
 
 
 CSS & HTML
-- anumite probleme de asezare in pagina
+
+O pagina noua pentru search !
+
+Mi-a venit o idee pentru afisarea unor produse random acolo pe prima pagina folosind scroll-ul facut de cosmin (still thinking!)
+
 
 
 
@@ -64,3 +68,4 @@ Contact:
 
 
 CSS & HTML:
+- anumite probleme de asezare in pagina
