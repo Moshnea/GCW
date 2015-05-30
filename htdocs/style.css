@@ -620,26 +620,6 @@ div.footer_right {
 	border: 1px solid #CCC; 
 }
 
-#yo{
-
-	font-size: 20px;
-	background-color: #F34949;
-	text-align:center;
-}
-
-#yo:hover {
-    color:#EB9797;
-}
-
-#meniu_contul_meu{
-	text-align:center
-}
-
-#meniu_contul_meu ul li{
-	padding-right: 30px;
-	overflow:hidden;
-}
-
 #avatar{
 	background:url("http://i273.photobucket.com/albums/jj208/Lowrider100_2008/L-avvie.png");
 	width:200px;
@@ -648,4 +628,61 @@ div.footer_right {
 	background-size:100% 100%;
 	
 	margin:0 auto;	
+}
+
+table#profil {
+	border-radius: 35px;
+	width: 80%;
+	height: 500px;
+	margin-right: 10%;
+	margin-left: 10%;
+	background-color: #f24a4a; 
+	text-align: center;
+}
+table td{
+	width: 50%;
+}
+img#img_avatar{
+	margin-top: 10%;
+	width: 200px;
+	height: 200px;
+
+	/* avatar rotund */
+    border-radius: 100%;
+    -o-border-radius: 100%;
+    -webkit-border-radius: 100%;
+   	-moz-border-radius: 100%;
+}
+a#text_profil{
+	font-family: Corbel;
+	font-size: 18px;
+}
+
+img#img_button_avatar{
+	width: 18px;
+	height: 21px;
+}
+
+img#img_button_cart{
+	width: 25px;
+	height: 22px;
+}
+
+td#detalii_profil{
+	text-align: left;
+	padding-left: 100px;
+	font-family: Manteka;
+	color: white;
+	font-size: 24px;
+}
+
+img#img_button_profil{
+	text-align: left;
+	width: 25px;
+	height: 22px;
+}
+
+img#img_button_history{
+	width: 18px;
+	height: 21px;
 }

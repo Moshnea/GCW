@@ -36,8 +36,6 @@
 
 <?php require("pop-up.php"); ?>
 
-<div id = "img_contul_meu"></div>
-
 
 <div id="openPass" class="modalDialog">
 	<div>
@@ -70,54 +68,62 @@
 	</div>
 </div>
 
-<div id="openUsername" class="modalDialog">
-	<div>
-		<a href="#close" title="Close" class="close">X</a>
-		<br><br>
-				<form action="my_account.php?actiune=schimbausername" method="post" class="contact-form">
-					<h1>Schimba UserName-ul
-						<span>Please fill all the texts in the fields.</span>
-					</h1>
-					<label>
-						<span>Password: </span>
-						<input id="mssage" type="text" name="username" size="20" placeholder="Password" />
-					</label>
-					<br>
-					<label>
-						<span>Old Username: </span>
-						<input id="message" type="password"  name="password" size="20" placeholder="Old Username" />
-					</label> 
-					<br>
-					<label>
-						<span>New Username: </span>
-						<input id="message" type="password"  name="cpassword" size="20" placeholder="New Username" />
-					</label> 
-					<br>
-					<label>
-						<span>Confirm New Username: </span>
-						<input id="message" type="password"  name="cpassword" size="20" placeholder="Confirm New Username" />
-					</label> 
-					<br>
-					 <label>
-						<span>&nbsp;</span>
-						<input type="submit" class="button" value="Submit" title="SubmitUsername" /> 
-					</label>    
-				</form>
-	</div>
-</div>
-
 <?php
 	if(!isset($_SESSION['username']))
 		die("Mai intai trebuie sa va logati!");
-	echo "Contul dumneavoastra [" . $_SESSION['username'] . "]";
 ?>
 
-<div id="meniu_contul_meu">
-	<ul>
-		<strong><li><a id = "yo" href="#openUsername" target="_self">Schimba Username</a></li></strong><br/>
-		<strong><li><a id = "yo" href="#openPass" target="_self">Schimba Parola</a></li></strong><br/>
-	</ul>
-</div>
+<div id = "img_contul_meu"></div>
+
+<table id = "profil">
+	<tr>
+		<td>
+			<img src="http://fc05.deviantart.net/fs71/f/2012/167/7/8/anime_avatar_by_spogjem-d53nmo2.png" alt="de completat" id = "img_avatar">
+			<br/><br/>
+		</td>
+		
+		<td id = "detalii_profil">
+			Name: Cobuz <br/>
+			Last Name: Veniamin <br/>
+			Sex: Neutru <br/>
+			Region: Crishana <br/>
+			Wallet: 100 $ <br/>
+
+		</td>
+	<tr>
+		<td>
+			<a href="#openPass" id="text_profil">
+				&nbsp;
+				<img src="img/change_avatar.png" id = "img_button_avatar">
+				Change Avatar
+			</a>
+
+			<br/><br/>
+
+			<a href="#openPass" id="text_profil">
+				<img src="img/shopping_cart.png" id = "img_button_cart">
+				Shopping Cart
+			</a>
+
+			<br/><br/>
+
+			<a href="#openPass" id="text_profil">
+				&nbsp;&nbsp;
+				<img src="img/purchase_history.png" id = "img_button_history">
+				Purchase History
+			</a>
+		</td>
+		<td>
+			<a href="#openPass" id="text_profil">
+				<img src="img/change_profil.png" id = "img_button_profil">
+				Change Profil
+			</a>
+		</td>
+	</tr>
+			
+		
+	</tr>
+</table>
 
 <?php
 	if($_GET['actiune'] == "schimbaparola")
