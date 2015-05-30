@@ -47,9 +47,6 @@
 						<input type="submit" class="button" value="Login" title="Login" /> 
 					</label>    
 					<br>
-					<label>
-					<button><a href="#openReg"/>Register Now!</button>
-					</label>
 				</form>
 	</div>
 </div>

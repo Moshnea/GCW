@@ -1,6 +1,15 @@
 <header>
 	<!-- Imagini/ overlay !-->
+	
 	<div id="overlay"></div>
+	<?php
+		if(isset($_SESSION['username']))
+			echo 
+				'<a href="shop.php">
+					<img src="img/shopping_cart.png" id = "img_header_cart">
+				</a>';
+	?>
+	
 	<div id="logo">
 		<!-- <div id="juicy"> <strong><h1>Juicy</h1></strong> </div> -->
 	
