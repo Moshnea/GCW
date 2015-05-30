@@ -20,6 +20,7 @@
 
 <?php require("pop-up.php"); ?>
 
+<?php require("bd_connection.php"); ?>
 
 
 <section id="section1">
@@ -56,6 +57,69 @@
 		-->
 
 <section id="section2">
+	<h2><b>New Types of juices</b></h2>
+	<div id = "imagini">
+
+<?php
+$s = ociparse($conn, "SELECT DENUMIRE, PRET from produse where rownum <= 24");
+if (ociexecute($s))
+{
+	// $index = 0;
+	for ($i=0; $i < 6; $i++)
+		# code...
+	{	
+		// $vector_pret[index] = ociresult($s, "PRET");
+		// $vector_denumire[index] = ociresult($s, "DENUMIRE");
+		// $index ++;
+		ocifetch($s);
+		$den1 = ociresult($s, "DENUMIRE");
+		$pret1 = ociresult($s, "PRET");
+		
+		ocifetch($s);
+		$den2 = ociresult($s, "DENUMIRE");
+		$pret2 = ociresult($s, "PRET");
+		
+		ocifetch($s);
+		$den3 = ociresult($s, "DENUMIRE");
+		$pret3 = ociresult($s, "PRET");
+		
+		ocifetch($s);
+		$den4 = ociresult($s, "DENUMIRE");
+		$pret4 = ociresult($s, "PRET");
+
+		echo "<section id=\"s\" class=\"sliderHiddenSection\" class=\"sections\">
+					<div id = \"sImg1\" class=\"slSection\">
+						<img src=\"img/slider/img1.png\" class = \"imajine\" />
+						<h3>$den1 $$pret1</h3>
+					</div>
+					<div id = \"sImg2\" class=\"slSection\">
+						<img src=\"img/slider/img2.png\" class = \"imajine\" />
+						<h3>$den2 $$pret2</h3>
+					</div>
+					
+					<div id = \"sImg3\" class=\"slSection\">
+						<img src=\"img/slider/img3.png\" class = \"imajine\" />
+						<h3>$den3 $$pret3</h3>
+					</div>
+					
+					<div id = \"sImg4\" class=\"slSection\">
+						<img src=\"img/slider/img4.png\" class = \"imajine\" />
+						<h3>$den4 $$pret4</h3>
+					</div>
+				
+				</section>";
+
+	}
+}
+
+//marele echooooo
+
+	
+
+//end of marele echooooo
+
+?>
+<!-- <section id="section2">
 	<h2><b>New Types of juices</b></h2>
 	<div id = "imagini">
 		<section id="s1" class="sections">
@@ -161,9 +225,24 @@
 			<li> <span>4</span>  </li>
 		</ul>
 		
-	</div>
+	</div> -->
+
+	
 	
 </section>
+
+<div id = "arrayBar">
+		
+		<ul>
+			<li> <span class="arraySelected">1</span> </li>
+			<li> <span>2</span>  </li>
+			<li> <span>3</span>  </li>
+			<li> <span>4</span>  </li>
+			<li> <span>5</span>  </li>
+			<li> <span>6</span>  </li>
+		</ul>
+		
+	</div>
 
 <script src = "script/slider.js" type="text/javascript"></script>
 
