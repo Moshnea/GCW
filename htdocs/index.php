@@ -27,7 +27,7 @@
 	<?php 
 		if(isset($_SESSION['username']))
 		{
-			$n = $_SESSION['nume'] . " " . $_SESSION['prenume'];
+			$n = $_SESSION['name'] . " " . $_SESSION['lastname'];
 			//echo $n;
 			echo "<h1>Welcome to Juicy " . $n . "!</h1>";
 		}

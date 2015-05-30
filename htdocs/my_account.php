@@ -5,9 +5,12 @@
 	$_GET['actiune']='';
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	   $oldpass = test_input($_POST["oldpassword"]);
-	   $pass = test_input($_POST["newpassword"]);
-	   $cpass = test_input($_POST["newcpassword"]);
+	   $pass = test_input($_POST["password"]);
+	   $name = test_input($_POST["name"]);
+	   $lastname = test_input($_POST["lastname"]);
+	   $sex = test_input($_POST["sex"]);
+	   $newpass = test_input($_POST["newpass"]);
+	   $cnewpass = test_input($_POST["cnewpass"]);
 	}
 
 	function test_input($data) {
@@ -37,32 +40,50 @@
 <?php require("pop-up.php"); ?>
 
 
-<div id="openPass" class="modalDialog">
+<div id="openProfil" class="modalDialog">
 	<div>
 		<a href="#close" title="Close" class="close">X</a>
 		<br><br>
-				<form action="my_account.php?actiune=schimbaparola" method="post" class="contact-form">
-					<h1>Schimba Parola
-						<span>Please fill all the texts in the fields.</span>
-					</h1>
+				<form action="my_account.php?actiune=change_profil" method="post" class="contact-form">
+					<h1> Change Profil </h1>
 					<label>
-						<span>Old Password: </span>
-						<input id="message" type="password"  name="oldpassword" size="20" placeholder="Old Password" />
+						<span>Password: </span>
+						<input id="message" type="password"  name="password" size="20" placeholder = "Password" />
 					</label> 
 					<br>
 					<label>
 						<span>New Password: </span>
-						<input id="message" type="password"  name="newpassword" size="20" placeholder="New Password" />
+						<input id="message" type="password"  name="newpass" size="20" placeholder = "New Password" />
 					</label> 
 					<br>
 					<label>
-						<span>Confirm New Password: </span>
-						<input id="message" type="password"  name="newcpassword" size="20" placeholder="Confirm New Password" />
+						<span>Confirm Password: </span>
+						<input id="message" type="password"  name="cnewpass" size="20" placeholder = "Confirm New Password" />
 					</label> 
 					<br>
-					 <label>
+					<label>
+						<span>Name: </span>
+						<input id="message" type="text"  name="name" size="20" placeholder= <?php echo $_SESSION["name"]; ?> />
+					</label> 
+					<br>
+					<label>
+						<span>Last Name: </span>
+						<input id="message" type="text"  name="lastname" size="20" placeholder = <?php echo $_SESSION["lastname"]; ?> />
+					</label> 
+					<br>
+					<label>
+						<span>Sex: </span>
+						<input id="message" type="text"  name="gender" size="20" placeholder= <?php echo $_SESSION["gender"]; ?> />
+					</label> 
+					<br>
+					<label>
+						<span>Region: </span>
+						<input id="message" type="text"  name="region" size="20" placeholder= <?php echo $_SESSION["region"]; ?> />
+					</label> 
+					<br>
+					<label>
 						<span>&nbsp;</span>
-						<input type="submit" class="button" value="Submit" title="SubmitPassword" /> 
+						<input type="submit" class="button" value="Submit" title="SubmitProfile" /> 
 					</label>    
 				</form>
 	</div>
@@ -92,7 +113,7 @@
 		</td>
 	<tr>
 		<td>
-			<a href="#openPass" id="text_profil">
+			<a href="#openProfil" id="text_profil">
 				&nbsp;
 				<img src="img/change_avatar.png" id = "img_button_avatar">
 				Change Avatar
@@ -100,21 +121,21 @@
 
 			<br/><br/>
 
-			<a href="#openPass" id="text_profil">
+			<a href="#openProfil" id="text_profil">
 				<img src="img/shopping_cart.png" id = "img_button_cart">
 				Shopping Cart
 			</a>
 
 			<br/><br/>
 
-			<a href="#openPass" id="text_profil">
+			<a href="#openProfil" id="text_profil">
 				&nbsp;&nbsp;
 				<img src="img/purchase_history.png" id = "img_button_history">
 				Purchase History
 			</a>
 		</td>
 		<td>
-			<a href="#openPass" id="text_profil">
+			<a href="#openProfil" id="text_profil">
 				<img src="img/change_profil.png" id = "img_button_profil">
 				Change Profil
 			</a>
@@ -126,7 +147,7 @@
 </table>
 
 <?php
-	if($_GET['actiune'] == "schimbaparola")
+	if($_GET['actiune'] == "change_profil")
 	{
 		if($pass == $cpass)
 		{

@@ -496,8 +496,7 @@ div.footer_right {
 
 .close:hover { background: #00d9ff; }
 
-	
-	/* Contact */
+/* Contact */
 .contact-form {
     margin-left:auto;
     margin-right:auto;
@@ -671,7 +670,7 @@ img#img_button_cart{
 td#detalii_profil{
 	text-align: left;
 	padding-left: 100px;
-	font-family: Manteka;
+	font-family: Corbel;
 	color: white;
 	font-size: 24px;
 }
