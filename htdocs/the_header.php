@@ -10,14 +10,14 @@
 	<!-- Meniu !-->
 	<div id = "menu">
 		<ul>
-			<strong><li><a href="index.php">Our Story</a></li></strong>
-			<strong><li><a href="meniu.php">Meniu</a></li></strong>
+			<strong><li><a href="index.php">Home</a></li></strong>
+			<strong><li><a href="meniu.php">Menu</a></li></strong>
 			<strong><li><a href="news.php">News</a></li>  </strong>
 			<strong><li><a href="#openModal">Contact</a></li></strong>
 			<?php
 				if(isset($_SESSION['username']))
 				{
-					echo '<strong><li><a href="my_account.php">Contul Meu</a></li></strong>';
+					echo '<strong><li><a href="my_account.php">Profile</a></li></strong>';
 					echo '<strong><li><a href="logout.php">Log out</a></li></strong>';
 				}
 				else

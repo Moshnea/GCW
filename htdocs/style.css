@@ -683,5 +683,9 @@ img#img_button_profil{
 
 img#img_button_history{
 	width: 18px;
+	height: 20px;
+}
+img#img_button_wallet{
+	width: 18px;
 	height: 21px;
 }

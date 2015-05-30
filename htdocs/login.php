@@ -96,7 +96,7 @@
                 }
                 if($avatar == NULL)
                 {
-                    $_SESSION['avatar'] = "/img/default_avatar.png";
+                    $_SESSION['avatar'] = "/img/default_avatar.jpg";
                 }
                 else
                 {
