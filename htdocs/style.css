@@ -26,7 +26,6 @@ header {
 	-o-box-shadow: 0px 0px 0px 6px rgb(243, 73, 73);
 	box-shadow: 0px 0px 0px 6px rgb(243, 73, 73);
 	
-	top:0px;
 	position:relative; 
 }
 
@@ -701,4 +700,23 @@ img#img_button_wallet{
 
 .error {
 	color: red;
+}
+
+img#img_produs{
+	width: 140px;
+	height: 140px;
+}
+
+section#produs{
+	margin-bottom: 200px;
+}
+
+div#imagine_produs{
+	float:left; 
+	width: 20%;
+}
+
+div#descriere_produs{
+	float: left;
+	width: 60%;
 }
