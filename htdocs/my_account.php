@@ -153,7 +153,7 @@
 		<div>
 			<a href="#close" title="Close" class="close">X</a>
 			<br><br>
-			<h1> Purchase History </h1>
+			<h1 style="text-align:center;"> Purchase History </h1>
 			<?php require("paginare.php"); ?>
 		</div>
 	</div>

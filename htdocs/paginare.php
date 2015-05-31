@@ -43,22 +43,29 @@ $default_locatie_pagina = htmlspecialchars($_SERVER["PHP_SELF"]);
             where r <= $default_pagina*$default_elem and r > ($default_pagina-1)*$default_elem");
 
         oci_bind_by_name($s, ":user_name", $_SESSION["username"]);
+        $index = 1;
+        echo '<div style="text-align:center;">';
         if (ociexecute($s, OCI_DEFAULT))
         {
+            echo '<table style="border: 1px solid #AAA; text-align:center; margin: 0 auto;">';
             while (ocifetch($s)) 
             {
-                
-                echo "<td>Produsul: ".ociresult($s, "DENUMIRE") . " cumparat la data: " . ociresult($s, "DATA_CUMPARARE") ."</td>";
-                echo '<br />';
-                
-             
+                echo "<tr";
+                if ($index % 2 == 1 )
+                    echo ' bgcolor="#B3B3B3"' ;
+                echo '>';   
+                echo "<td>Ati cumparat produsul: <b>".ociresult($s, "DENUMIRE") . "</b> la data: <i>" . ociresult($s, "DATA_CUMPARARE") ."</i></td>";
+                echo '</tr>';
+                $index ++;             
             }
+            echo "</table>";
         }
 
         $next = $default_pagina + 1;
         $anterior  = $default_pagina - 1;
 
-        echo "<br>";
+
+        echo '<br>';
         if ($default_pagina <= 1)
             echo "<button disabled onclick=\"location.href='$default_locatie_pagina"."?pagina=$anterior&elem=$default_elem#openHistory'\"> Previous </button>";
         else
@@ -69,7 +76,7 @@ $default_locatie_pagina = htmlspecialchars($_SERVER["PHP_SELF"]);
         
         else
             echo    "<button onclick=\"location.href='$default_locatie_pagina"."?pagina=$next&elem=$default_elem#openHistory'\"> Next </button>";
-        echo "<br><br>";
+        echo "</div><br><br>";
 ?>
 
 </div>

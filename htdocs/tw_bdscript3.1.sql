@@ -50,8 +50,8 @@ end;
 
 
 create or replace type Profil as object(
-  url_avatar varchar2(200),
-  url_descriere varchar2(200),
+  url_avatar varchar2(100),
+  url_descriere varchar2(100),
   gender number(1),
   regiune varchar(20),
   member function get_gender return number,
@@ -585,44 +585,75 @@ create or replace package body user_pkg is
     v_userAroma := new Aroma;
     select arome into v_userAroma from users where username = utilizator;
     user_array('mere') := v_userAroma.a_mere;
+    dbms_output.put_line('mere: '||v_userAroma.a_mere);
     user_array('pere') := v_userAroma.a_pere;
+    dbms_output.put_line('pere: '||v_userAroma.a_pere);
     user_array('portocale') := v_userAroma.a_portocale;
+    dbms_output.put_line('portocalae: '||v_userAroma.a_portocale);
     user_array('lamai') := v_userAroma.a_lamai;
+    dbms_output.put_line('lamai: '||v_userAroma.a_lamai);
     user_array('struguri') := v_userAroma.a_struguri;
+    dbms_output.put_line('struguri: '||v_userAroma.a_struguri);
     user_array('cirese') := v_userAroma.a_cirese;
+    dbms_output.put_line('cirese: '||v_userAroma.a_cirese);
     user_array('visine') := v_userAroma.a_visine;
+    dbms_output.put_line('visine: '||v_userAroma.a_visine);
     user_array('capsuni') := v_userAroma.a_capsuni;
+    dbms_output.put_line('capsuni: '||v_userAroma.a_capsuni);
     user_array('grapefruit') := v_userAroma.a_grapefruit;
+    dbms_output.put_line('grapfruit: '||v_userAroma.a_grapefruit);
     user_array('ananas') := v_userAroma.a_ananas;
+    dbms_output.put_line('ananams: '||v_userAroma.a_ananas);
     user_array('fructe_de_padure') := v_userAroma.a_fructe_de_padure;
+    dbms_output.put_line('fructe de padure: '||v_userAroma.a_fructe_de_padure);
     
-    --determinare index preferinte    
+    
+--    v_user_max_max := user_array.first;
+--    dbms_output.put_line(v_user_max_max);
+--    
+--    v_user_max_mij := user_array.next(v_user_max_max);
+--    dbms_output.put_line(v_user_max_mij);
+--    
+--    v_user_max_min := user_array.next(v_user_max_mij);
+--    dbms_output.put_line(v_user_max_min);
+--    
+    
     v_index := user_array.first;
     v_user_max_max := v_index;
-    v_user_max_mij := v_index;
-    v_user_max_min := v_index;
-    while (v_index is not null) --aflam maximul
+    v_index := user_array.next(v_index);
+    
+    while (v_index is not null)
     loop
       if user_array(v_user_max_max) < user_array(v_index) then v_user_max_max := v_index;
       end if;
       v_index := user_array.next(v_index);
-    end loop; --while
+    end loop;
+    user_array(v_user_max_max) := -1;
     
     v_index := user_array.first;
-    while (v_index is not null) --aflam mijlociul
+    v_user_max_mij := v_index;
+    v_index := user_array.next(v_index);
+    while (v_index is not null)
     loop
-      if user_array(v_user_max_mij) < user_array(v_index) and user_array(v_user_max_mij) < user_array(v_user_max_max) then v_user_max_mij := v_index;
+      if user_array(v_user_max_mij) < user_array(v_index) then v_user_max_mij := v_index;
       end if;
       v_index := user_array.next(v_index);
-    end loop; --while
+    end loop;
+    user_array(v_user_max_mij) := -1;
     
     v_index := user_array.first;
-    while (v_index is not null) -- aflam minimul
+    v_user_max_min := v_index;
+    v_index := user_array.next(v_index);
+    while (v_index is not null)
     loop
-      if user_array(v_user_max_min) < user_array(v_index) and user_array(v_user_max_min) < user_array(v_user_max_mij) then v_user_max_min := v_index;
+      if user_array(v_user_max_min) < user_array(v_index) then v_user_max_min := v_index;
       end if;
       v_index := user_array.next(v_index);
-    end loop; --while
+    end loop;
+    user_array(v_user_max_min) := -1;
+    
+    
+    dbms_output.put_line(v_user_max_max || ' ' || v_user_max_mij || ' ' || v_user_max_min);
     
     --pentru fiecare produs din cursor -> Do !
     for pro in produse_nec
