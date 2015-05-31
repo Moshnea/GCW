@@ -712,11 +712,30 @@ section#produs{
 }
 
 div#imagine_produs{
+	margin-top: -20px;
+ 	margin-bottom: -25px;
 	float:left; 
 	width: 20%;
 }
 
 div#descriere_produs{
+	transform: translateY(10%);
 	float: left;
 	width: 60%;
+	color: #f24a4a;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 18px;
+	font-family: Corbel;
+}
+
+img#meniu_bar{
+	width: 100%;
+	height: 5px;
+}
+
+img#add_to_cart{
+	transform: translateY(100%);
+	width: 140px;
+	height: 50px;
 }
