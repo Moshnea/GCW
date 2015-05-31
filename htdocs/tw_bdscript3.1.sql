@@ -425,7 +425,8 @@ end csv_pkg;
 /
 
 
-create or replace package user_pkg is
+create or replace 
+package user_pkg is
 
   procedure exist_user (f_user in varchar2, f_pass in varchar2, f_return out number);
   procedure change_password (p_user in varchar2, new_pass in varchar2); 
@@ -443,10 +444,9 @@ create or replace package user_pkg is
     p_gender in number,
     p_regiune in varchar2);
   procedure buy_product( p_user in varchar2, p_produs in number);
-  function Get3Pref (utilizator in varchar2) return varchar2;
+  procedure Get3Pref (utilizator in varchar2);
   
 end user_pkg;
-/
 
 
 create or replace package body user_pkg is
@@ -563,7 +563,7 @@ create or replace package body user_pkg is
     insert into vanzari values (p_user, p_produs, sysdate);
   end;
   
-  function Get3Pref (utilizator in varchar2) return varchar2 is
+  procedure Get3Pref (utilizator in varchar2) is
     v_userAroma Aroma;
     type array_aroma is table of number index by varchar2(100);
     user_array array_aroma;
@@ -680,7 +680,8 @@ create or replace package body user_pkg is
     end loop;
     delete from rezultat;
     insert into rezultat (unu, doi, trei) values (p_unu, p_doi, p_trei);
-    return to_char(p_unu) || '?' || to_char(p_doi) || '?' || to_char(p_trei);
+    commit;
+    --return to_char(p_unu) || '?' || to_char(p_doi) || '?' || to_char(p_trei);
   end;
   
 end user_pkg;
