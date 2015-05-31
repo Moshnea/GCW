@@ -424,6 +424,7 @@ create or replace package body csv_pkg is
 end csv_pkg;
 /
 
+create table rezulate (unu number(5), doi number(5), trei number(5));
 
 create or replace 
 package user_pkg is
