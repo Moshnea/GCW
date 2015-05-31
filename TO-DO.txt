@@ -8,15 +8,12 @@
 Adaugat o noua pagina pt ce-i logati in care sa arate ce are in cosul de cumparaturi.
 
 
-Contul meu:
--De afisat profilul utilizatorului
-	+ buton (alta pagina/pop-up) de schimbat parola (de username zic eu ca nu ar fi nevoie)
-	+ buton de editat profilul (alta pagina/pop-up)
-	+ buton de adaugat credit in portofel
-	+ buton de afisare istoricul cumparaturilor (de preferat in josul paginii)
+Profile:
+-De afisat profilul utilizatorului	
+	
 
 
-Meniu:
+Menu:
 - Adaugari de produse (paginare cu N produse, de preferant N sa fie 10)
 	*Pt cei logati posibilitatea de a baga produsul in cosul de cumparaturi
 - Pt cei logati sa apara (pe undeva in aceasi pagina) cele 3 produse recomandate
@@ -51,11 +48,14 @@ Cos de cumparaturi:
 
 
 
-Contul meu:
+Profile:
+-De afisat profilul utilizatorului
+	+ buton (alta pagina/pop-up) de schimbat parola (de username zic eu ca nu ar fi nevoie)
+	+ buton de editat profilul (alta pagina/pop-up)
+	+ buton de adaugat credit in portofel
+	+ buton de afisare istoricul cumparaturilor (de preferat in josul paginii)
 
-
-
-Meniu:
+Menu:
 
 
 
@@ -69,3 +69,4 @@ Contact:
 
 CSS & HTML:
 - anumite probleme de asezare in pagina
+- inca cateva chestii
