@@ -736,9 +736,6 @@ div#descriere_produs{
 }
 
 #add_to_cart{
-
-	max-width: 50px;
-	max-height: 50px;
 	z-index: 100;
 	position:absolute;
 }
