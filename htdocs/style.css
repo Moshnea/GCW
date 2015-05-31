@@ -13,8 +13,8 @@ header {
 
 	min-width:100%;
 	max-width:100%;
-	min-height:500px;
-	max-height:500px;
+	min-height:400px;
+	max-height:400px;
 	background: url(img/header.jpg) no-repeat center center; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -46,8 +46,8 @@ header {
 	background-color:rgba(63,63,63, 0.59);
 	min-width:100%;
 	max-width:100%;
-	min-height:500px;
-	max-height:500px;
+	min-height:400px;
+	max-height:400px;
 	position:absolute;
 	z-index:1;
 }
@@ -101,7 +101,6 @@ header {
 	font-size:15px;
 	right:0%;
 	float:left;
-	top:90%;
 }
 
 #menu ul li{
