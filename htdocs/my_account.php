@@ -34,7 +34,7 @@
 		<div>
 			<a href="#close" title="Close" class="close">X</a>
 			<br><br>
-			<form action="my_account.php?actiune=change_profil" method="post" class="contact-form">
+			<form action="my_account.php?actiune=change_profile" method="post" class="contact-form">
 				<h1> Change Profil </h1>
 				<label>
 					<span>Password: </span>
@@ -208,7 +208,7 @@
 			</td>
 			<td>
 				<a href="#openProfile" id="text_profil">
-					<img src="img/change_profil.png" id = "img_button_profil">
+					<img src="img/change_profile.png" id = "img_button_profil">
 					Change Profil
 				</a>
 
@@ -227,196 +227,39 @@
 	</table>
 
 	<?php
-		if($_GET['actiune'] == "change_profil")
+		// change profile
+		try
 		{
-			//($_SERVER["REQUEST_METHOD"] == "POST")
-			$pass = test_input($_POST["password"]);
-		   	$name = test_input($_POST["name"]);
-		   	$lastname = test_input($_POST["lastname"]);
-		   	$gender = test_input($_POST["gender"]);
-		   	$newpass = test_input($_POST["newpass"]);
-		  	$cnewpass = test_input($_POST["cnewpass"]);
-		  	$region = test_input($_POST["region"]);
+			require("change_profile.php");
+		} catch (Exception $e)
+		{
+			echo '<p class="error">' . $e->getMessage() . '!</p>';
+		} finally {
+			if ($conn != NULL)
+				oci_close($conn);
+		}
 
-			require("bd_connection.php");
-
-			if (!$conn) {
-	    		echo 'Failed to connect to Oracle';
-	    		die();
-			}
-			else
-			{
-				$sql = oci_parse($conn, "BEGIN SELECT count(*) INTO :bind1 FROM users WHERE username = :username AND password = :pass; END;");
-				oci_bind_by_name($sql, ":bind1", $nr);
-				oci_bind_by_name($sql, ":username", $_SESSION["username"]);
-				oci_bind_by_name($sql, ":pass", $pass);
-				oci_execute($sql, OCI_DEFAULT);
-				if($nr != 0)
-				{
-					if(($newpass != NULL) && ($newpass == $cnewpass))
-					{
-						$s = oci_parse($conn, "BEGIN user_pkg.change_password(:user, :newpass); commit; END;");
-		     			oci_bind_by_name($s, ":user", $_SESSION["username"]);
-		     			oci_bind_by_name($s, ":newpass", $newpass);
-		     			if(oci_execute($s, OCI_DEFAULT))
-		     				echo "Parola a fost schimbata cu succes!!!!!!!!!!!!";
-		     			else
-		     				echo '<p class="error"> nunu</p>';
-	     			}
-
-	     			if ($name != NULL) 
-	     			{
-		     			$_SESSION["name"] = $name;
-	     			}
-
-	     			if($lastname != NULL)
-	     			{
-	     				$_SESSION["lastname"] = $lastname;
-	     			}
-
-	     			if($gender != NULL)
-	     			{
-	     				if($gender == "M")
-	     					$aux_gender = 0;
-	     				else
-	     					$aux_gender = 1;
-	     				$_SESSION["gender"] = $gender;
-	     			}
-	     			else
-	     			{
-	     				if($_SESSION["gender"] == "M")
-	     					$aux_gender = 0;
-	     				else
-	     					$aux_gender = 1;
-	     			}
-
-	     			if($region != NULL)
-	     			{
-	     				$_SESSION["region"] = $region;
-	     			}
-
-	     			$s = oci_parse($conn, "
-	     				BEGIN 
-	     					UPDATE users u SET u.nume = :name, u.prenume = :lastname, u.profile.gender = :gender, u.profile.regiune = :region
-	     					WHERE u.username = :user; 
-	     					commit; 
-	     				END;");
-	     			oci_bind_by_name($s, ":user", $_SESSION["username"]);
-	     			oci_bind_by_name($s, ":name", $_SESSION["name"]);
-	     			oci_bind_by_name($s, ":lastname", $_SESSION["lastname"]);
-	     			oci_bind_by_name($s, ":gender", $aux_gender);
-	     			oci_bind_by_name($s, ":region", $_SESSION["region"]);
-	     			if(oci_execute($s, OCI_DEFAULT))
-	     			{
-	     				echo '<META HTTP-EQUIV="Refresh" Content="0; URL = my_account.php">';
-	     			}
-	     			else
-	     				echo '<p class="error">nunu</p>';
-	     		}
-				else
-				{
-					echo '<p class="error">Nu s-a gasit accest account!!</p>';
-				}
-			}
+		//change avatar
+		try
+		{
+			require("change_avatar.php");
+		} catch (Exception $e)
+		{
+			echo '<p class="error">' . $e->getMessage() . '!</p>';
+		} finally {
+			if ($conn != NULL)
 			oci_close($conn);
 		}
 
-		if($_GET['actiune'] == "change_avatar")
+		// add money
+		try
 		{
-			$pass = test_input($_POST["password"]);
-			$avatar = test_input($_POST["avatar"]);
-
-			require("bd_connection.php");
-
-			if (!$conn) 
-			{
-	    		echo 'Failed to connect to Oracle';
-	    		die();
-			}
-			else
-			{
-				$sql = oci_parse($conn, "BEGIN SELECT count(*) INTO :bind1 FROM users WHERE username = :username AND password = :pass; END;");
-				oci_bind_by_name($sql, ":bind1", $nr);
-				oci_bind_by_name($sql, ":username", $_SESSION["username"]);
-				oci_bind_by_name($sql, ":pass", $pass);
-				oci_execute($sql, OCI_DEFAULT);
-				if($nr != 0)
-				{
-					if ($avatar != NULL) 
-	     			{
-		     			$_SESSION["avatar"] = $avatar;
-
-		     			$s = oci_parse($conn, "BEGIN UPDATE users u SET u.profile.url_avatar = :avatar WHERE u.username = :user; commit; END;");
-		     			oci_bind_by_name($s, ":user", $_SESSION["username"]);
-		     			oci_bind_by_name($s, ":avatar", $_SESSION["avatar"]);
-
-		     			if(oci_execute($s, OCI_DEFAULT))
-		     			{
-		     				echo '<META HTTP-EQUIV="Refresh" Content="0; URL = my_account.php">';
-		     			}
-		     		}
-	     			else
-	     			{
-	     				echo '<p class="error">nunu</p>';
-	     			}	
-				}
-				else
-				{
-					echo '<p class="error">Nu s-a gasit accest account!!</p>';
-				}
-			}
-			oci_close($conn);
-		}
-
-		if($_GET['actiune'] == "add_money")
+			require("add_money.php");
+		} catch (Exception $e)
 		{
-			$pass = test_input($_POST["password"]);
-			$amount = test_input($_POST["amount"]);
-			require("bd_connection.php");
-
-			if (!$conn) 
-			{
-	    		echo 'Failed to connect to Oracle';
-	    		die();
-			}
-			else
-			{
-				$sql = oci_parse($conn, "BEGIN SELECT count(*) INTO :bind1 FROM users WHERE username = :username AND password = :pass; END;");
-				oci_bind_by_name($sql, ":bind1", $nr);
-				oci_bind_by_name($sql, ":username", $_SESSION["username"]);
-				oci_bind_by_name($sql, ":pass", $pass);
-				oci_execute($sql, OCI_DEFAULT);
-				if($nr != 0)
-				{
-					if ($amount != NULL)
-	     			{
-	     				if(is_int($amount))
-	     				{
-			     			$s = oci_parse($conn, "BEGIN UPDATE users SET wallet = wallet + :amount WHERE username = :user; commit; END;");
-			     			oci_bind_by_name($s, ":user", $_SESSION["username"]);
-			     			oci_bind_by_name($s, ":amount", $amount);
-
-			     			if(oci_execute($s, OCI_DEFAULT))
-			     			{
-			     				$_SESSION["wallet"] += $amount;
-			     				echo '<META HTTP-EQUIV="Refresh" Content="0; URL = my_account.php">';
-			     			}
-			     		}
-			     		else
-			     		{
-			     			echo "not a number";
-			     		}
-		     		}
-	     			else
-	     			{
-	     				echo '<p class="error">nunu</p>';
-	     			}	
-				}
-				else
-				{
-					echo '<p class="error">Nu s-a gasit accest account!!</p>';
-				}
-			}
+			echo '<p class="error">' . $e->getMessage() . '!</p>';
+		} finally {
+			if ($conn != NULL)
 			oci_close($conn);
 		}
 	?>

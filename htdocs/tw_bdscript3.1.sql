@@ -50,8 +50,8 @@ end;
 
 
 create or replace type Profil as object(
-  url_avatar varchar2(100),
-  url_descriere varchar2(100),
+  url_avatar varchar2(200),
+  url_descriere varchar2(200),
   gender number(1),
   regiune varchar(20),
   member function get_gender return number,

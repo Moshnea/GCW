@@ -65,13 +65,13 @@
 					</label>					
 					<br>
 					<label>
-						<span>Nume: </span>
-						<input id="message" type="text"  name="nume" size="20" placeholder="Nume" />
+						<span>Name: </span>
+						<input id="message" type="text"  name="nume" size="20" placeholder="Name" />
 					</label> 
 					<br>
 					<label>
-						<span>Prenume: </span>
-						<input id="message" type="text"  name="prenume" size="20" placeholder="Prenume" />
+						<span>Last Name: </span>
+						<input id="message" type="text"  name="prenume" size="20" placeholder="Last Name" />
 					</label>
 					<br>
 					<label>
