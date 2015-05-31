@@ -678,6 +678,8 @@ create or replace package body user_pkg is
       end if;
       
     end loop;
+    delete from rezultat;
+    insert into rezultat (unu, doi, trei) values (p_unu, p_doi, p_trei);
     return to_char(p_unu) || '?' || to_char(p_doi) || '?' || to_char(p_trei);
   end;
   
