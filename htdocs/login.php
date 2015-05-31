@@ -21,7 +21,7 @@
 <head>
 
 <meta charset = "UTF-8">
-<title></title>
+<title>Login</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 
 

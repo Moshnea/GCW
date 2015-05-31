@@ -18,7 +18,7 @@
 <head>
 
 	<meta charset = "UTF-8">
-	<title>Profile</title>
+	<title><?php echo $_SESSION["name"] . " " . $_SESSION["lastname"]; ?></title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 
 </head>
