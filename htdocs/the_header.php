@@ -6,8 +6,11 @@
 		if(isset($_SESSION['username']))
 		{
 			$total = 0;
-			foreach ($_SESSION['product'] as $key => $value) {
-				$total += $value;
+			if(isset($_SESSION['product']))
+			{
+				foreach ($_SESSION['product'] as $key => $value) {
+					$total += $value;
+				}
 			}
 			echo 
 				'<a href="shop.php">

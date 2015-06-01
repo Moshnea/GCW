@@ -16,9 +16,10 @@
 
 <body>
 
-<?php require("the_header.php"); ?>
-
-<?php require("pop-up.php"); ?>
+<?php 
+	require("the_header.php");
+	require("pop-up.php"); 
+?>
 
 <section id = "produs">
 	<div id = "img_meniu"></div>
@@ -39,7 +40,10 @@
 
 				$stm = ociparse($conn, "begin :aroma := produse_pkg.get_aroma_string(produse_pkg.get_aroma($key)); end;");
 				oci_bind_by_name($stm, ":aroma", $aroma, 100);
-				ociexecute($stm);
+				if(!ociexecute($stm))
+				{
+					throw new Exception("An error has occurred!");
+				}
 				$aroma = substr($aroma, 0, -2);
 
 				$s = ociparse($conn, "BEGIN SELECT denumire, stoc, pret INTO :den, :stoc, :pret FROM produse WHERE id_produs = $key; END;");
@@ -48,7 +52,10 @@
 				oci_bind_by_name($s, ":stoc", $stoc, 40);
 				oci_bind_by_name($s, ":pret", $pret, 40);
 
-				ociexecute($s);
+				if(!ociexecute($s))
+				{
+					throw new Exception("An error has occurred!");
+				}
 
 				$total += $pret * $value;
 
@@ -125,7 +132,10 @@
 										}
 
 										$s = ociparse($conn, "commit");
-										ociexecute($s);
+										if(!ociexecute($s))
+										{
+											throw new Exception("An error has occurred!");
+										}
 										$_SESSION['wallet'] -= $total;
 										unset($_SESSION['product']);
 										echo '<META HTTP-EQUIV="Refresh" Content="0; URL = shop.php">';
@@ -154,7 +164,8 @@
 		}
 	}catch (Exception $e)
 	{
-		echo '<p class="error">' . $e->getMessage() . '!</p>';
+		$_SESSION['message'] = $e->getMessage();
+		echo '<META HTTP-EQUIV="Refresh" Content="0; URL = shop.php#errors">';
 	} finally {
 		if ($conn != NULL)
 			oci_close($conn);

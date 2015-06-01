@@ -65,6 +65,7 @@
 							throw new Exception("Not a valid number");
 						}
 					}
+
 				echo '</form>
 			</div>
 
@@ -79,48 +80,59 @@
 
 <head>
 
-<meta charset = "UTF-8">
-<title>Menu</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+	<meta charset = "UTF-8">
+	<title>Menu</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
 
 </head>
 
 <body>
 
-	<?php require("the_header.php"); ?>
-
-	<?php require("pop-up.php"); ?>
+	<?php 
+		require("the_header.php"); 
+		require("pop-up.php"); 
+	?>
 
 	<div id = "img_meniu"></div>
 	
 	<?php
 		try
 		{
+			$conn = NULL;
 			if (isset($_SESSION['username']))
 			{			
 				require("bd_connection.php");
 				$username = $_SESSION['username'];
-				//echo $_SESSION['username'];
+
 				$s = ociparse($conn, "begin user_pkg.get3pref('$username', :unu, :doi, :trei); commit; end;");
 			    oci_bind_by_name($s, ":unu", $unu);
 			    oci_bind_by_name($s, ":doi", $doi);
 			    oci_bind_by_name($s, ":trei", $trei);
-			    ociexecute($s);
+			    if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }
 
 				$s = ociparse($conn, "begin :aroma_unu := produse_pkg.get_aroma_string(produse_pkg.get_aroma($unu)); end;");
 				oci_bind_by_name($s, ":aroma_unu", $aroma_unu, 100);
-				ociexecute($s);
+				if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }
 				$s = ociparse($conn, "begin :aroma_doi := produse_pkg.get_aroma_string(produse_pkg.get_aroma($doi)); end;");
 				oci_bind_by_name($s, ":aroma_doi", $aroma_doi, 100);
-				ociexecute($s);
+				if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }
 				$s = ociparse($conn, "begin :aroma_trei := produse_pkg.get_aroma_string(produse_pkg.get_aroma($trei)); end;");
 				oci_bind_by_name($s, ":aroma_trei", $aroma_trei, 100);
-				ociexecute($s);
+				if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }
 
-				//echo "$aroma_unu <br> $aroma_doi <br> $aroma_trei <br>";
 
 				$s = ociparse($conn, "select denumire, pret, stoc from produse where id_produs = $unu or id_produs = $doi or id_produs = $trei");
-				ociexecute($s);
+				if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }
 				
 				ocifetch($s);
 				$denumire_unu = ociresult($s, "DENUMIRE");
@@ -146,9 +158,10 @@
 				print_produs($doi, $denumire_doi, $aroma_doi, $stoc_doi, $pret_doi);
 				print_produs($trei, $denumire_trei, $aroma_trei, $stoc_trei, $pret_trei);
 			}
-		} catch (Exception $e)
+		}catch (Exception $e)
 		{
-			echo '<p class="error">' . $e->getMessage() . '!</p>';
+			$_SESSION['message'] = $e->getMessage();
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL = meniu.php#errors">';
 		} finally {
 			if ($conn != NULL)
 				oci_close($conn);
@@ -180,7 +193,9 @@
 			$default_locatie_pagina = htmlspecialchars($_SERVER["PHP_SELF"]);
 			require("bd_connection.php");
 			$s = ociparse($conn, "select denumire, pret, stoc, id_produs from produse");
-			ociexecute($s);
+			if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }
 			$index = 1;
 
 			while (ocifetch($s))
@@ -188,7 +203,9 @@
 				$id_prod = ociresult($s, "ID_PRODUS");
 				$stm = ociparse($conn, "begin :aroma := produse_pkg.get_aroma_string(produse_pkg.get_aroma($id_prod)); end;");
 				oci_bind_by_name($stm, ":aroma", $aroma, 100);
-				ociexecute($stm);
+				if(!ociexecute($stm)){
+			    	throw new Exception("An error has occurrate");
+			    }
 
 				if($filter != NULL)
 				{
@@ -202,10 +219,7 @@
 				$vec_pret[$index] = ociresult($s, "PRET");
 				$vec_stoc[$index] = ociresult($s, "STOC");
 
-
-
 				$index++;
-
 			}
 
 			if (isset($_GET['elem']) && isset($_GET['pagina']))
@@ -250,41 +264,56 @@
 							<form action = " " method = "POST">
 								<input id="add_buc" type="text" name="quantity'. $id .'" size="3" placeholder=" buc"  />&nbsp;&nbsp;
 								<input type = "image" name = "add_to_cart "src="img/add_to_cart.png" id = "add_to_cart"/>';
-
-								if((isset($_POST['quantity'.$id])) && (!empty($_POST['quantity'.$id])))
-								{
-									$aux_q = $_POST['quantity'.$id];
-									if(($aux_q >= 0)&&(is_numeric($aux_q)))
+								
+									if(isset($_POST['quantity'.$id]))
 									{
-										if((isset($_SESSION['product'][$id]))&&(!empty($_SESSION['product'][$id])))
+										if(isset($_SESSION['username']))
 										{
-											if($stoc >= $_SESSION['product'][$id] + $aux_q)
+											if(!empty($_POST['quantity'.$id]))
 											{
-												$_SESSION['product'][$id] += $aux_q;
+												$aux_q = $_POST['quantity'.$id];
+												if(($aux_q >= 0)&&(is_numeric($aux_q)))
+												{
+													if((isset($_SESSION['product'][$id]))&&(!empty($_SESSION['product'][$id])))
+													{
+														if($stoc >= $_SESSION['product'][$id] + $aux_q)
+														{
+															$_SESSION['product'][$id] += $aux_q;
+														}
+														else
+														{
+															throw new Exception("Not in stock!");
+														}
+													}
+													else
+													{
+														if($stoc >= $aux_q)
+														{
+															$_SESSION['product'][$id] = $aux_q;
+														}
+														else
+														{
+															throw new Exception("Not in stock!");
+														}
+													}
+													echo '<META HTTP-EQUIV="Refresh" Content="0; URL = shop.php">';
+												}
+												else
+												{
+													throw new Exception("Not a valid number");
+												}
 											}
 											else
 											{
-												throw new Exception("Not in stock!");
+												throw new Exception("Quantity not seted!");
 											}
 										}
 										else
 										{
-											if($stoc >= $aux_q)
-											{
-												$_SESSION['product'][$id] = $aux_q;
-											}
-											else
-											{
-												throw new Exception("Not in stock!");
-											}
+											echo '<META HTTP-EQUIV="Refresh" Content="0; URL = index.php#openLog">';
 										}
-										echo '<META HTTP-EQUIV="Refresh" Content="0; URL = shop.php">';
 									}
-									else
-									{
-										throw new Exception("Not a valid number");
-									}
-								}
+								
 							echo '</form>
 						</div>
 
@@ -306,9 +335,10 @@
 	        else
 	            echo    "<button onclick=\"location.href='$default_locatie_pagina"."?pagina=$next&elem=$default_elem&filter=$filter'\"> Next </button>";
 	        echo "</div></div><br><br>";
-    	} catch (Exception $e)
+    	}catch (Exception $e)
 		{
-			echo '<p class="error">' . $e->getMessage() . '!</p>';
+			$_SESSION['message'] = $e->getMessage();
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL = meniu.php#errors">';
 		} finally {
 			if ($conn != NULL)
 				oci_close($conn);

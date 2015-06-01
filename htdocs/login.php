@@ -20,32 +20,33 @@
 
 <head>
 
-<meta charset = "UTF-8">
-<title>Login</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
-
+    <meta charset = "UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
 </head>
 
 <body>
 
-<?php require("the_header.php"); ?>
-
-<?php require("pop-up.php"); ?>
+<?php 
+    require("the_header.php");
+    require("pop-up.php"); 
+?>
 
 <section id="section2">
 
 <?php
+try
+{
     if(isset($_SESSION['username']))
-        echo "<h1>Sunteti deja conectat!!!";
+        throw new Exception("You are already logged-in!");
+        
     else 
     {
     	require("bd_connection.php");
         if (!$conn) {
-            echo 'Failed to connect to Oracle';
-            die();
+            throw new Exception("Unable to connect to database!");
         }
-
         
         $s = oci_parse($conn, "BEGIN user_pkg.exist_user(:bind1 , :bind2, :bind3); END;");
         oci_bind_by_name($s, ":bind1", $username);
@@ -56,7 +57,6 @@
         {	    	
             if($ok == 1)
             {
-            	echo "<h1>V-ati conectat cu succes la server!</h1>";
             	$s0 = oci_parse($conn, "BEGIN
                                             SELECT u.nume, u.prenume, u.profile.gender, u.profile.regiune, u.profile.url_avatar, u.wallet
                                             INTO :name, :lastname, :gender, :region, :url_avatar, :wallet
@@ -70,7 +70,10 @@
                 oci_bind_by_name($s0,":region",$region, 40);
                 oci_bind_by_name($s0,":url_avatar",$avatar, 40);
                 oci_bind_by_name($s0,":wallet",$wallet, 40);
-            	oci_execute($s0, OCI_DEFAULT);
+            	if(!oci_execute($s0, OCI_DEFAULT))
+                {
+                    throw new Exception("An error has occurred!");
+                }
 
             	$_SESSION['username'] = $username;
             	$_SESSION['name'] = $name;
@@ -102,25 +105,30 @@
                 {
                     $_SESSION['avatar'] = $avatar;
                 }
-
-
             	echo '<META HTTP-EQUIV="Refresh" Content="0; URL = my_account.php">';
             }
             else
-            	echo "<h1>Nume sau parola gresite!</h1>";
+            	throw new Exception("The username or password are wrong!");        
         }
         else
         {
-            $e = oci_error($s); 
-            echo htmlentities($e['message']);
+            throw new Exception("An error has occurred!");
+            
         }
         oci_close($conn);
     }
+}catch (Exception $e)
+{
+    $_SESSION['message'] = $e->getMessage();
+    echo '<META HTTP-EQUIV="Refresh" Content="0; URL = index.php#errors">';
+} finally {
+    if ($conn != NULL)
+        oci_close($conn);
+}
+
 ?>
 	
-
 </section>
-
 
 <?php require("the_footer.php"); ?>
 

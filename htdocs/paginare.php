@@ -1,6 +1,7 @@
 <?php
 $default_locatie_pagina = htmlspecialchars($_SERVER["PHP_SELF"]);
-
+try{
+    $conn = NULL;
     require("bd_connection.php");
 	if (isset($_GET['elem']) && isset($_GET['pagina']))
         {
@@ -27,14 +28,12 @@ $default_locatie_pagina = htmlspecialchars($_SERVER["PHP_SELF"]);
         }
         else
         {
-            $e = oci_error($s); 
-            echo htmlentities($e['message']);
+            throw new Exception("An error has occurred!");
         }
 
         $max_pagini = floor($rows / $default_elem);
         if ($rows % $default_elem != 0)
             $max_pagini++;
-        //echo $max_pagini;
 
         $s = ociparse($conn, 
             "SELECT * from 
@@ -52,31 +51,43 @@ $default_locatie_pagina = htmlspecialchars($_SERVER["PHP_SELF"]);
             {
                 echo "<tr";
                 if ($index % 2 == 1 )
-                    echo ' bgcolor="#B3B3B3"' ;
+                    echo ' bgcolor="#f24a4a"' ;
                 echo '>';   
-                echo "<td>Ati cumparat produsul: <b>".ociresult($s, "DENUMIRE") . "</b> la data: <i>" . ociresult($s, "DATA_CUMPARARE") ."</i></td>";
+                echo "<td style=\"font-family: Corbel;\">Ati cumparat produsul: <b>".ociresult($s, "DENUMIRE") . "</b> la data: <i>" . ociresult($s, "DATA_CUMPARARE") ."</i></td>";
                 echo '</tr>';
                 $index ++;             
             }
             echo "</table>";
         }
+        else
+        {
+            throw new Exception("An error has occurred!");
+        }
 
         $next = $default_pagina + 1;
         $anterior  = $default_pagina - 1;
-
 
         echo '<br>';
         if ($default_pagina <= 1)
             echo "<button disabled onclick=\"location.href='$default_locatie_pagina"."?pagina=$anterior&elem=$default_elem#openHistory'\"> Previous </button>";
         else
             echo "<button onclick=\"location.href='$default_locatie_pagina"."?pagina=$anterior&elem=$default_elem#openHistory'\"> Previous </button>";
-        echo " Pagina: $default_pagina";
+        echo "<span style =\"font-family: Corbel; color: #f24a4a; font-weight: bold;\"> Page: $default_pagina </span>";
         if ($default_pagina >= $max_pagini)
          echo    "<button disabled onclick=\"location.href='$default_locatie_pagina"."?pagina=$next&elem=$default_elem#openHistory'\"> Next </button>";
         
         else
             echo    "<button onclick=\"location.href='$default_locatie_pagina"."?pagina=$next&elem=$default_elem#openHistory'\"> Next </button>";
         echo "</div><br><br>";
+    }catch (Exception $e)
+    {
+        $_SESSION['message'] = $e->getMessage();
+        echo '<META HTTP-EQUIV="Refresh" Content="0; URL = index.php#errors">';
+    } finally {
+        if ($conn != NULL)
+            oci_close($conn);
+    }
+
 ?>
 
 </div>

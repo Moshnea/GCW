@@ -1,25 +1,39 @@
+<div id="errors" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<br><br>
+		<form action="#close" method="post" class="contact-form">
+			<span id = "error_message"> <?php echo $_SESSION['message']; ?></span>
+			<label>
+				<span>&nbsp;</span> 
+				<input type="submit" class="button" value="Ok!" title="ok" /> 
+			</label>    
+		</form>
+	</div>
+</div>
+
 <div id="openModal" class="modalDialog">
 	<div>
 		<a href="#close" title="Close" class="close">X</a>
 		<br><br>
-				<form action="" method="post" class="contact-form">
-					<h1>Contact Form 
-						<span>Please fill all the texts in the fields.</span>
-					</h1>
-					<label>
-						<span>Your username:</span>
-						<input id="name" type="text" name="user" size="20" placeholder="Your username" />
-					</label>
-					
-					<label>
-						<span>Message :</span>
-						<textarea id="message" name="message" placeholder="Your Message to Us"></textarea>
-					</label> 
-					<label>
-						<span>&nbsp;</span> 
-						<input type="submit" class="button" value="Send" title="Send" /> 
-					</label>    
-				</form>
+			<form action="" method="post" class="contact-form">
+				<h1>Contact Form 
+					<span>Please fill all the texts in the fields.</span>
+				</h1>
+				<label>
+					<span>Your username:</span>
+					<input id="name" type="text" name="user" size="20" placeholder="Your username" />
+				</label>
+				
+				<label>
+					<span>Message :</span>
+					<textarea id="message" name="message" placeholder="Your Message to Us"></textarea>
+				</label> 
+				<label>
+					<span>&nbsp;</span> 
+					<input type="submit" class="button" value="Send" title="Send" /> 
+				</label>    
+			</form>
 	</div>
 </div>
 

@@ -25,9 +25,10 @@
 
 <body>
 
-	<?php require("the_header.php"); ?>
-
-	<?php require("pop-up.php"); ?>
+	<?php 
+		require("the_header.php"); 
+		require("pop-up.php"); 
+	 ?>
 
 
 	<div id="openProfile" class="modalDialog">
@@ -153,7 +154,7 @@
 		<div>
 			<a href="#close" title="Close" class="close">X</a>
 			<br><br>
-			<h1 style="text-align:center;"> Purchase History </h1>
+			<h1 id="history"> Purchase History </h1>
 			<?php require("paginare.php"); ?>
 		</div>
 	</div>
@@ -231,9 +232,10 @@
 		try
 		{
 			require("change_profile.php");
-		} catch (Exception $e)
+		}catch (Exception $e)
 		{
-			echo '<p class="error">' . $e->getMessage() . '!</p>';
+			$_SESSION['message'] = $e->getMessage();
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL = index.php#errors">';
 		} finally {
 			if ($conn != NULL)
 				oci_close($conn);
@@ -243,27 +245,31 @@
 		try
 		{
 			require("change_avatar.php");
-		} catch (Exception $e)
+		}catch (Exception $e)
 		{
-			echo '<p class="error">' . $e->getMessage() . '!</p>';
+			$_SESSION['message'] = $e->getMessage();
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL = index.php#errors">';
 		} finally {
 			if ($conn != NULL)
-			oci_close($conn);
+				oci_close($conn);
 		}
+
 
 		// add money
 		try
 		{
 			require("add_money.php");
-		} catch (Exception $e)
+		}catch (Exception $e)
 		{
-			echo '<p class="error">' . $e->getMessage() . '!</p>';
+			$_SESSION['message'] = $e->getMessage();
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL = index.php#errors">';
 		} finally {
 			if ($conn != NULL)
-			oci_close($conn);
+				oci_close($conn);
 		}
-	?>
-	<?php require("the_footer.php"); ?>
+
+	require("the_footer.php"); 
+?>
 
 </body>
 

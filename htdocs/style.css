@@ -687,6 +687,12 @@ img#img_button_profil{
 	height: 22px;
 }
 
+#history{
+	text-align: center;
+	font-family: Corbel;
+	color: #f24a4a; 
+}
+
 img#img_button_history{
 	width: 18px;
 	height: 20px;
@@ -807,6 +813,14 @@ div#descriere_produs{
 }
 
 #all_products{
+	font-size: 28px;
+	text-align: center;
+	color: #f24a4a;
+	font-weight: bold;
+	font-family: Corbel;
+}
+
+#error_message{
 	font-size: 28px;
 	text-align: center;
 	color: #f24a4a;
