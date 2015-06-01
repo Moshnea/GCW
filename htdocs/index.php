@@ -122,10 +122,7 @@
 	}
 
 	?>
-
-	</section>
-
-	<div id = "arrayBar">
+<div id = "arrayBar">
 			<ul>
 				<li> <span class="arraySelected">1</span> </li>
 				<li> <span>2</span>  </li>
@@ -135,6 +132,9 @@
 				<li> <span>6</span>  </li>
 			</ul>
 		</div>
+	</section>
+
+	
 
 	<script src = "script/slider.js" type="text/javascript"></script>
 

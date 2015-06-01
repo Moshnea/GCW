@@ -199,9 +199,10 @@ header {
 }
 
 #arrayBar{
-	margin:0 auto;
+	margin:250px auto;
 	position:absolute;
-	left:43%;	
+	left:43%;
+		
 }
 
 
