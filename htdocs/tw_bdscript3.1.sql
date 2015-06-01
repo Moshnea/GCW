@@ -424,8 +424,6 @@ create or replace package body csv_pkg is
 end csv_pkg;
 /
 
-create table rezulate (unu number(5), doi number(5), trei number(5));
-
 create or replace 
 package user_pkg is
 
@@ -448,7 +446,7 @@ package user_pkg is
   procedure Get3Pref (utilizator in varchar2, unu out number, doi out number, trei out number);
   
 end user_pkg;
-
+/
 
 create or replace package body user_pkg is
 
@@ -682,10 +680,16 @@ create or replace package body user_pkg is
     unu := p_unu;
     doi := p_doi;
     trei := p_trei;
-    --delete from rezultat;
-    --insert into rezultat (unu, doi, trei) values (p_unu, p_doi, p_trei);
-    --commit;
-    --return to_char(p_unu) || '?' || to_char(p_doi) || '?' || to_char(p_trei);
+    if unu is null then select id_produs into unu from produse where rownum = 1 order by dbms_random.value();
+    end if;
+    if doi is null then select id_produs into doi from produse where rownum = 1 order by dbms_random.value();
+    end if;
+    if trei is null then select id_produs into trei from produse where rownum = 1 order by dbms_random.value();
+    end if;
+    
+    dbms_output.put_line(unu);
+    dbms_output.put_line(doi);
+    dbms_output.put_line(trei);
   end;
   
 end user_pkg;
