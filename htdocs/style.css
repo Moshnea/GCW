@@ -708,7 +708,7 @@ img#img_produs{
 #produs{
 	width : 1227px;
 	margin : 0 auto;
-	margin-bottom: 200px;
+	margin-bottom: 0px;
 }
 
 div#imagine_produs{
@@ -736,10 +736,14 @@ div#descriere_produs{
 }
 
 #add_to_cart{
-	z-index: 100;
+	width: 120px;
+	transform: translateY(130%);
 	position:absolute;
 }
 
+#add_buc{
+	transform: translateY(330%);
+}
 
 #contForm {
 

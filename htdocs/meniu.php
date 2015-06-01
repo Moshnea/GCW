@@ -19,7 +19,6 @@
 <title>Menu</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 
-
 </head>
 
 <body>
@@ -113,7 +112,9 @@
 		<span>&nbsp;</span> 
 		<input type="submit" class="button" value="Search" title="Search" />		
 	</form>
-
+	<section id = "produs">
+		<img src = "img/meniu_bar.png" id = "meniu_bar">
+	</section>
 
 	<?php
 		try
@@ -139,23 +140,19 @@
 
 				if($filter != NULL)
 				{
-					if(strpos($aroma,$filter) === false)
+					if(strpos($aroma, $filter) === false)
 						continue;
 				}
 
+				$vec_id[$index] = $id_prod;
 				$vec_aroma[$index] = $aroma;
 				$vec_den[$index] = ociresult($s, "DENUMIRE");
 				$vec_pret[$index] = ociresult($s, "PRET");
 				$vec_stoc[$index] = ociresult($s, "STOC");
-				
 
-				
 
-				//echo $vec_aroma[$index];
 
 				$index++;
-
-
 
 			}
 
@@ -169,46 +166,78 @@
 	            $default_pagina = 1;
 	            $default_elem = 10;
 	        }
-	        
 
 	        $max_pagini = floor(($index-1) / $default_elem);
 	        if (($index-1) % $default_elem != 0)
 	            $max_pagini++;
 
-
-	        //r <= $default_pagina*$default_elem and r > ($default_pagina-1)*$default_elem
 			for ($i=($default_pagina-1)*$default_elem + 1; $i <= $default_pagina*$default_elem && $i < $index; $i++) { 
-				# code...
+				$id = $vec_id[$i];
 				$den = $vec_den[$i];
 				$pret = $vec_pret[$i];
 				$stoc = $vec_stoc[$i];
 				$aroma = substr($vec_aroma[$i], 0, -2);
 				echo 
-								'<section id = "produs">
-							<img src = "img/meniu_bar.png" id = "meniu_bar">
+					'<section id = "produs">
 
-							<div id = "imagine_produs">
-								<img src="img/slider/img1.png" id = "img_produs">
-							</div>
-							<div id="descriere_produs">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Denumire:'. $den.'
-								<br/>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aroma: '.$aroma.'
-								<br/>
-								&nbsp;&nbsp;&nbsp;&nbsp;Stoc: '.$stoc.'
-								<br/>
-								Pret: '.$pret.' $
-								<br/>
+						<div id = "imagine_produs">
+							<img src="img/slider/img1.png" id = "img_produs">
+						</div>
+						<div id="descriere_produs">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Denumire:'. $den.'
+							<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aroma: '.$aroma.'
+							<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;Stoc: '.$stoc.'
+							<br/>
+							Pret: '.$pret.' $
+							<br/>
 
-							</div>
-							<div id = "imagine_produs">
-								<a href = "">
-									<img src="img/add_to_cart.png" id = "add_to_cart">
-								</a>
-							</div>
+						</div>
+						<div id = "imagine_produs">
+							<form action = " " method = "POST">
+								<input id="add_buc" type="text" name="quantity'. $id .'" size="3" placeholder=" buc"  />&nbsp;&nbsp;
+								<input type = "image" name = "add_to_cart "src="img/add_to_cart.png" id = "add_to_cart"/>';
 
-							<img src = "img/meniu_bar.png" id = "meniu_bar">
-						</section>';
+								if((isset($_POST['quantity'.$id])) && (!empty($_POST['quantity'.$id])))
+								{
+									$aux_q = $_POST['quantity'.$id];
+									if(($aux_q >= 0)&&(is_numeric($aux_q)))
+									{
+										if((isset($_SESSION['product'][$id]))&&(!empty($_SESSION['product'][$id])))
+										{
+											if($stoc >= $_SESSION['product'][$id] + $aux_q)
+											{
+												$_SESSION['product'][$id] += $aux_q;
+											}
+											else
+											{
+												throw new Exception("Not in stock!");
+											}
+										}
+										else
+										{
+											if($stoc >= $aux_q)
+											{
+												$_SESSION['product'][$id] = $aux_q;
+											}
+											else
+											{
+												throw new Exception("Not in stock!");
+											}
+										}
+										
+									}
+									else
+									{
+										throw new Exception("Not a valid number");
+									}
+								}
+							echo '</form>
+						</div>
+
+						<img src = "img/meniu_bar.png" id = "meniu_bar">
+					</section>';
 			}
 
 			$next = $default_pagina + 1;
