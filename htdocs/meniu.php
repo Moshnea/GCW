@@ -23,32 +23,75 @@
 	<div id = "img_meniu"></div>
 
 	<?php
-		// if (isset($_SESSION['username']))
-		// {
-		// 	echo '<div id = "recomdari">';
-
-
-
-
-
-
-
-
-		// 	echo '</div>';
+		if (isset($_SESSION['username']))
+		{
 			
-		// 	require("bd_connection.php");
-		// 	$username = $_SESSION['username'];
-		// 	//echo $_SESSION['username'];
-		// 	$s = ociparse($conn, "begin user_pkg.get3pref('$username'); commit; end;");
-		// 	ociexecute($s);
-		// 	$s = ociparse($conn, "select denumire, pret, stoc");
-		// 	ociexecute($s);
-		// 	ocifetch($s);
-		// 	$unu = ociresult($s, "UNU");
-		// 	$doi = ociresult($s, "DOI");
-		// 	$trei = ociresult($s, "TREI");
-		// 	echo "$unu $doi $trei";
-		// }
+			
+			require("bd_connection.php");
+			$username = $_SESSION['username'];
+			//echo $_SESSION['username'];
+			$s = ociparse($conn, "begin user_pkg.get3pref('$username'); commit; end;");
+			ociexecute($s);
+			$s = ociparse($conn, "select * from rezultat");
+			ociexecute($s);
+			ocifetch($s);
+			$unu = ociresult($s, "UNU");
+			$doi = ociresult($s, "DOI");
+			$trei = ociresult($s, "TREI");
+
+			$s = ociparse($conn, "begin :aroma_unu := produse_pkg.get_aroma_string(produse_pkg.get_aroma($unu)); end;");
+			oci_bind_by_name($s, ":aroma_unu", $aroma_unu, 100);
+			ociexecute($s);
+			$s = ociparse($conn, "begin :aroma_doi := produse_pkg.get_aroma_string(produse_pkg.get_aroma($doi)); end;");
+			oci_bind_by_name($s, ":aroma_doi", $aroma_doi, 100);
+			ociexecute($s);
+			$s = ociparse($conn, "begin :aroma_trei := produse_pkg.get_aroma_string(produse_pkg.get_aroma($trei)); end;");
+			oci_bind_by_name($s, ":aroma_trei", $aroma_trei, 100);
+			ociexecute($s);
+
+			//echo "$aroma_unu <br> $aroma_doi <br> $aroma_trei <br>";
+
+			$s = ociparse($conn, "select denumire, pret, stoc from produse where id_produs = $unu or id_produs = $doi or id_produs = $trei");
+			ociexecute($s);
+			
+			ocifetch($s);
+			$denumire_unu = ociresult($s, "DENUMIRE");
+			$pret_unu = ociresult($s, "PRET");
+			$stoc_unu = ociresult($s, "STOC");
+
+			ocifetch($s);
+			$denumire_doi = ociresult($s, "DENUMIRE");
+			$pret_doi = ociresult($s, "PRET");
+			$stoc_doi = ociresult($s, "STOC");
+
+			ocifetch($s);
+			$denumire_trei = ociresult($s, "DENUMIRE");
+			$pret_trei = ociresult($s, "PRET");
+			$stoc_trei = ociresult($s, "STOC");
+			echo "<div id=\"recomandari\">";
+				echo "<h3>Recomandari</h3>";
+			echo "<div id = \"recomand_unu\">
+				Denumire: $denumire_unu
+				Pret: $pret_unu
+				Stoc: $stoc_unu
+				Aroma: $aroma_unu
+			</div>";
+			echo "<div id = \"recomand_doi\">
+				Denumire: $denumire_doi
+				Pret: $pret_doi
+				Stoc: $stoc_doi
+				Aroma: $aroma_doi
+			</div>";
+			echo "<div id = \"recomand_trei\">
+				Denumire: $denumire_trei
+				Pret: $pret_trei
+				Stoc: $stoc_trei
+				Aroma: $aroma_trei
+			</div>";
+			echo "</div>";
+
+
+		}
 	?>
 
 	<?php
