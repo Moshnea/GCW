@@ -34,7 +34,7 @@
 					
 					<label>
 						<span>Username: </span>
-						<input id="mssage" type="text" name="username" size="20" placeholder="Username" />
+						<input id="message" type="text" name="username" size="20" placeholder="Username" />
 					</label>
 					<br>
 					<label>
@@ -91,3 +91,15 @@
 				</form>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	function openContact(){
+		document.getElementById("contact").style.display = "block";
+		document.getElementById("contact").style.overflow = "hidden";
+	}
+
+	document.getElementById("contactClsBtn").onclick = function(){
+		document.getElementById("contact").style.display = "none";	
+	}
+</script>
