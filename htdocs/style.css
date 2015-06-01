@@ -665,8 +665,8 @@ img#img_button_cart{
 }
 
 img#img_header_cart{
-	width: 48px;
-	height: 42px;
+	width: 60px;
+	height: 50px;
     top: 10px;
     right: 10px;
     z-index: 100;
@@ -730,6 +730,59 @@ div#descriere_produs{
 	
 }
 
+#total{
+	transform: translateY(-10%);
+	float: left;
+	width: 60%;
+	color: #f24a4a;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 18px;
+	font-family: Corbel;
+	
+}
+
+#descriere_produs_rec{
+	transform: translateY(10%);
+	float: left;
+	width: 60%;
+	color: #22A7F0;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 18px;
+	font-family: Corbel;
+	
+}
+
+#buy_now{
+	transform: translateY(60%);
+	width: 120px;
+}
+
+#nr_prod{
+    top: 25px;
+    right: 17px;
+    font-size: 14px;
+    font-weight: bold;
+    color : #f24a4a ;
+    z-index: 100;
+    position: absolute;
+}
+
+#search_ul{
+	text-align: right;
+	color: #f24a4a;
+	font-family: Corbel;
+	font-weight: bold;
+}
+
+#paginare{
+	text-align: center;
+	color: #f24a4a;
+	font-family: Corbel;
+	font-weight: bold;
+}
+
 #meniu_bar{
 	width: 100%;
 	height: 5px;
@@ -743,6 +796,22 @@ div#descriere_produs{
 
 #add_buc{
 	transform: translateY(330%);
+}
+
+#recomandari{
+	font-size: 28px;
+	text-align: center;
+	color: #22A7F0;
+	font-weight: bold;
+	font-family: Corbel;
+}
+
+#all_products{
+	font-size: 28px;
+	text-align: center;
+	color: #f24a4a;
+	font-weight: bold;
+	font-family: Corbel;
 }
 
 #contForm {

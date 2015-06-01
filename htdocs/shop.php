@@ -21,6 +21,7 @@
 <?php require("pop-up.php"); ?>
 
 <section id = "produs">
+	<div id = "img_meniu"></div>
 	<img src = "img/meniu_bar.png" id = "meniu_bar">
 </section>
 <?php
@@ -39,6 +40,7 @@
 				$stm = ociparse($conn, "begin :aroma := produse_pkg.get_aroma_string(produse_pkg.get_aroma($key)); end;");
 				oci_bind_by_name($stm, ":aroma", $aroma, 100);
 				ociexecute($stm);
+				$aroma = substr($aroma, 0, -2);
 
 				$s = ociparse($conn, "BEGIN SELECT denumire, stoc, pret INTO :den, :stoc, :pret FROM produse WHERE id_produs = $key; END;");
 
@@ -83,13 +85,13 @@
 					</section>';
 			}
 			echo '<section id = "produs">
-						<div id="descriere_produs">
-							TOTAL =' . $total .'
+						<div id="total" style = "text-align: right;">
+							<br/>TOTAL =' . $total .' $ <br/>
 						</div>
 
 						<div id = "imagine_produs">
 							<form action = " " method = "POST">
-								<input type = "image" name = "buy" src="img/buy_now.png" id = "add_to_cart"/>';
+								<input id="buy_now" type = "image" name = "buy" src="img/buy_now.png" id = "add_to_cart"/>';
 
 								if(isset($_POST['buy_x'], $_POST['buy_y']))
 								{	
@@ -138,15 +140,16 @@
 							echo '</form>
 						</div>
 						<img src = "img/meniu_bar.png" id = "meniu_bar">
+						<br/><br/><br/><br/><br/>
 					</section>';
 			
 		}
 		else
 		{
-			echo ' <div>Your cart is empty</div>
+			echo ' <div id = "all_products">Your cart is empty</div>
 					<section id = "produs">
 						<img src = "img/meniu_bar.png" id = "meniu_bar">
-					</section>';
+					</section><br/><br/><br/>';
 
 		}
 	}catch (Exception $e)

@@ -4,10 +4,17 @@
 	<div id="overlay"></div>
 	<?php
 		if(isset($_SESSION['username']))
+		{
+			$total = 0;
+			foreach ($_SESSION['product'] as $key => $value) {
+				$total += $value;
+			}
 			echo 
 				'<a href="shop.php">
 					<img src="img/shopping_cart.png" id = "img_header_cart">
+					<div id = "nr_prod">'. $total . '</div>
 				</a>';
+		}
 	?>
 	
 	<div id="logo"></div>
@@ -17,7 +24,7 @@
 		<ul>
 			<strong><li><a href="index.php">Home</a></li></strong>
 			<strong><li><a href="meniu.php">Menu</a></li></strong>
-			<strong><li><a href="news.php">News</a></li>  </strong>
+			<strong><li><a href="news.php">News</a></li></strong>
 			<strong><li><a href="#openModal">Contact</a></li></strong>
 			<?php
 				if(isset($_SESSION['username']))
