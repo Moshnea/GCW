@@ -58,7 +58,7 @@
 									throw new Exception("Not in stock!");
 								}
 							}
-							
+							echo '<META HTTP-EQUIV="Refresh" Content="0; URL = meniu.php">';
 						}
 						else
 						{
@@ -128,21 +128,29 @@
 			    	throw new Exception("An error has occurrate");
 			    }
 
-
-				$s = ociparse($conn, "select denumire, pret, stoc from produse where id_produs = $unu or id_produs = $doi or id_produs = $trei");
+			    $s = ociparse($conn, "select denumire, pret, stoc from produse where id_produs = $unu");
 				if(!ociexecute($s)){
 			    	throw new Exception("An error has occurrate");
 			    }
-				
-				ocifetch($s);
+			    ocifetch($s);
 				$denumire_unu = ociresult($s, "DENUMIRE");
 				$pret_unu = ociresult($s, "PRET");
 				$stoc_unu = ociresult($s, "STOC");
 
-				ocifetch($s);
+			    $s = ociparse($conn, "select denumire, pret, stoc from produse where id_produs = $doi");
+				if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }
+
+			    ocifetch($s);
 				$denumire_doi = ociresult($s, "DENUMIRE");
 				$pret_doi = ociresult($s, "PRET");
 				$stoc_doi = ociresult($s, "STOC");
+
+				$s = ociparse($conn, "select denumire, pret, stoc from produse where id_produs = $trei");
+				if(!ociexecute($s)){
+			    	throw new Exception("An error has occurrate");
+			    }				
 
 				ocifetch($s);
 				$denumire_trei = ociresult($s, "DENUMIRE");
@@ -296,7 +304,7 @@
 															throw new Exception("Not in stock!");
 														}
 													}
-													echo '<META HTTP-EQUIV="Refresh" Content="0; URL = shop.php">';
+													echo '<META HTTP-EQUIV="Refresh" Content="0; URL = meniu.php">';
 												}
 												else
 												{
