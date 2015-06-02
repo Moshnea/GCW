@@ -6,7 +6,7 @@
 			<span id = "error_message"> <?php echo $_SESSION['message']; ?></span>
 			<label>
 				<span>&nbsp;</span> 
-				<input type="submit" class="button" value="Ok!" title="ok" /> 
+				<input type="submit" style="margin: 15px 20%;" class="button" value="Ok!" title="ok" /> 
 			</label>    
 		</form>
 	</div>
