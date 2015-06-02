@@ -104,17 +104,26 @@
 								{	
 									if($_SESSION['wallet'] >= $total)
 									{
-										$succes = 0;
+										$succes1 = 0;
+										$succes2 = 0;
 										$index = 0;
 										foreach ($_SESSION['product'] as $key => $value) {
 											$s = ociparse($conn, "BEGIN UPDATE produse SET stoc = stoc - $value WHERE id_produs = $key; END;");
 											if(ociexecute($s))
 											{
-												$succes += 1;
+												$succes1 += 1;
 											}
+											$s = ociparse($conn, "BEGIN user_pkg.buy_product(:user, $key); END;");
+											oci_bind_by_name($s,':user', $_SESSION['username']);
+											if(ociexecute($s))
+											{
+												$succes2 += 1;
+											}
+
 											$index += 1;
+
 										}
-										if($succes != $index)
+										if(($succes1 != $index) || ($succes2 != $index))
 										{
 											$s = ociparse($conn, "rollback");
 											ociexecute($s);
